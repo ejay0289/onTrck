@@ -1,9 +1,8 @@
 // MyModal.js
 import React, { useState } from "react";
-import {Picker} from '@react-native-picker/picker'
+import { Picker } from "@react-native-picker/picker";
 import { Modal, View, Text, Button, StyleSheet } from "react-native";
 import { TextInput } from "react-native";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const MyModal = ({
   setSpending,
@@ -12,14 +11,21 @@ const MyModal = ({
   isVisible,
   onClose,
   onConfirm,
+  selected,
+  setSelected,
+  title,
+  setTitle,
   spending,
   income,
   balance,
 }) => {
-  const handleAmount = (num) => {
-    setAmount(num);
+  const handleAmount = (amount) => {
+    setAmount(amount);
   };
-  const [selected,selectedValue] = useState('option1')
+
+  const handleTitle = (title) =>{
+    setTitle(title)
+  }
 
   return (
     <Modal
@@ -28,22 +34,34 @@ const MyModal = ({
       transparent={true}
       onRequestClose={onClose}
     >
-
-
       <View style={styles.modalContainer}>
         <View style={styles.modalContent}>
-
           <Text>This is a modal content</Text>
           <TextInput
             style={styles.input}
             clearButtonMode="always"
-            value={amount}
+            value={title}
+            placeholder="Title"
+            onChangeText={handleTitle}
+          />
+          <TextInput
+            style={styles.input}
+            clearButtonMode="always"
+            value={amount.toString()}
+            placeholder="Enter amount"
             onChangeText={handleAmount}
             keyboardType="numeric"
           />
+
           <Button title="Close" onPress={onClose} />
           <Button title="Confirm" onPress={onConfirm} />
-
+          <Picker
+            selectedValue={selected}
+            onValueChange={(itemValue) => setSelected(itemValue)}
+          >
+            <Picker.Item label="Spending" value="spending" />
+            <Picker.Item label="Income" value="income" />
+          </Picker>
         </View>
       </View>
     </Modal>

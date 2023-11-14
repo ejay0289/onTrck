@@ -1,13 +1,21 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, FlatList } from "react-native";
+import BudgetItem from "./budgetItem";
 
-export default function Items(){
-    return(
-        <View>
+export default function Items({ budgetItems }) {
+  return (
+    <View style={styles.container}>
+        
+      <FlatList
+        data={budgetItems}
+        keyExtractor={(item) => item.key.toString()}
 
-        </View>
-    )
+        renderItem={({ item }) => <BudgetItem item={item} />}
+      />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-
-})
+  container: { flex: 1,
+ },
+});

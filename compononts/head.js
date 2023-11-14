@@ -34,6 +34,9 @@ const styles = StyleSheet.create({
   },
   balance:{
     textAlign:"center"
+  },
+  head:{
+    marginBottom:40
   }
 
 });
